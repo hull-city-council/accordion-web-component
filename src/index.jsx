@@ -1,6 +1,6 @@
 import r2wc from "@r2wc/react-to-web-component";
-import CollectionDays from "./App";
+import AccordionWebComponent from "./App";
 
-const binCollections = r2wc(CollectionDays, { props: { uprn: "string" } });
+const AccordionComponent = r2wc(AccordionWebComponent);
 
-customElements.define("upcoming-bin-collections", binCollections);
+customElements.define("accordion-component", AccordionComponent);
