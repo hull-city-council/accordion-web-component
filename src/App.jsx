@@ -1,27 +1,30 @@
 import * as React from 'react';
 import {
-  AccordionGroup,
-  Accordion,
-  Stack,
-  Typography,
-  Avatar,
-  ListItemContent,
-  Chip,
-  Button,
-  ListItemButton,
-  ListItem
+Accordion,
+Stack,
+Typography,
+Avatar,
+ListItemContent,
+Chip,
+List,
+ListItemButton,
+ListItem,
+ListItemDecorator,
+Divider
 } from '@mui/joy';
 import AccordionDetails, {
-  accordionDetailsClasses,
+accordionDetailsClasses,
 } from '@mui/joy/AccordionDetails';
 import AccordionSummary, {
-  accordionSummaryClasses,
+accordionSummaryClasses,
 } from '@mui/joy/AccordionSummary';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
-import ChecklistIcon from '@mui/icons-material/Checklist';
+import PollIcon from '@mui/icons-material/Poll';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import PlaceIcon from '@mui/icons-material/Place';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
+import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
+import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
 import dayjs from 'dayjs';
 import { useBankHolidays } from "react-uk-bank-holidays";
 
@@ -55,165 +58,127 @@ export default function AccordionWebComponent() {
   
     return false;
   };
-
-  const platforms = [
-    {
-      accounts: [
-        {
-          name: "myAccount",
-          url: "https://account.hull.gov.uk",
-        },
-        {
-          name: "Council tax",
-          url: "https://www.hullcc.gov.uk/myrevsandbens/scripts/OPENPortal-Live.wsc/common/login.p",
-        },
-        {
-          name: "Housing",
-          url: "https://hullcc.engagehousing.app/",
-        },
-        {
-          name: "School portal",
-          url: "https://hull.cloud.servelec-synergy.com/Synergy/Live/SynergyWeb/",
-        },
-        {
-          name: "Libraries",
-          url: "https://hull.ent.sirsidynix.net.uk/client/en_GB/default/?#",
-        },
-        {
-          name: "Job vacancies",
-          url: "https://www.hullcc.gov.uk/jobs/Index.aspx",
-        },
-      ],
-    },
-  ];
-  return (
-    <>
-    <AccordionGroup
-    variant="plain"
-    transition="0.2s"
-    sx={{
-      borderRadius: 'md',
-      [`& .${accordionDetailsClasses.content}.${accordionDetailsClasses.expanded}`]:
-        {
-          paddingBlock: '1rem',
-        },
-      [`& .${accordionSummaryClasses.button}`]: {
-        paddingBlock: '1rem',
-      },
-    }}
-  >
-    <Accordion expanded={isLiveChatAvailable()} disabled={!isLiveChatAvailable()}>
-      <AccordionSummary>
-        <Avatar color="danger">
-          <ChatBubbleOutlineIcon />
-        </Avatar>
-        <ListItemContent>
-       
-          <Typography level="title-lg">
-            Live chat  <Chip color="primary" variant="outlined"> Recommended </Chip>
+return ( 
+<>
+    <List aria-labelledby="ellipsis-list-demo" sx={{ '--ListItemDecorator-size' : '56px' }}>
+      <ListItem>
+        <ListItemButton component="button" onClick={function(){((e)=> {window.ChatRedApi.open(); })(); return false;}} sx={{"&:disabled" : {backgroundColor: '#f5f5f5'}}} disabled={!isLiveChatAvailable()}>
+          <ListItemDecorator>
+            <Avatar color="danger">
+              <ChatBubbleOutlineIcon />
+            </Avatar>
+          </ListItemDecorator>
+          <ListItemContent>
+            <Typography level="title-lg">
+              Live chat {isLiveChatAvailable() ? <Chip color="primary" variant="outlined"> Recommended </Chip> : null}
             </Typography>
-           
-          <Typography level="body-sm">
-          
+            <Typography level="body-sm">
             {isLiveChatAvailable() ? 'Average 5 minute wait time' : 'Live chat is available Monday, Tuesday, Thursday and Friday 9am to 4.30pm and Wednesday 10.30am to 4.30pm. Closed on bank holidays.'}
-          </Typography>
-          
-        </ListItemContent>
-       
-      </AccordionSummary>
-      <AccordionDetails>
-        <Stack spacing={1.5}>
-        <Button color="danger" onClick={function(){((e) => {window.ChatRedApi.open(); })(); return false;}}>
-          Open live chat
-        </Button>
-        </Stack>
-      </AccordionDetails>
-    </Accordion>
-
-    <Accordion>
-      <AccordionSummary>
-        <Avatar color="danger">
-          <ChecklistIcon />
-        </Avatar>
-        <ListItemContent>
-          <Typography level="title-md">Online forms</Typography>
-          <Typography level="body-sm">
-            Save time and complete one of our online forms
-          </Typography>
-        </ListItemContent>
-      </AccordionSummary>
-      <AccordionDetails>
-        <Stack spacing={1.5}>
-          {platforms[0].accounts.map((account, index) => (
-              <ListItem component="a" href={account.url} key={index}>
-                <ListItemButton>{account.name}</ListItemButton>
-              </ListItem>
-            ))}
-        </Stack>
-      </AccordionDetails>
-    </Accordion>
-
-    <Accordion>
-      <AccordionSummary>
-        <Avatar color="danger">
-          <LocalPhoneIcon />
-        </Avatar>
-        <ListItemContent>
-          <Typography level="title-md">Call us</Typography>
-          <Typography level="body-sm">
-            Longer wait times
-          </Typography>
-        </ListItemContent>
-      </AccordionSummary>
-      <AccordionDetails>
-        <Stack spacing={1.5}>
-          <Button color="danger" component="a" href='tel:01482300300'>
-            Call 01482 300300
-          </Button>
-        </Stack>
-      </AccordionDetails>
-    </Accordion>
-    
-    <Accordion>
-      <AccordionSummary>
-        <Avatar color="danger">
-          <PlaceIcon />
-        </Avatar>
-        <ListItemContent>
-          <Typography level="title-md">Visit us</Typography>
-          <Typography level="body-sm">
-            See us in person at one of our customer service centres
-          </Typography>
-        </ListItemContent>
-      </AccordionSummary>
-      <AccordionDetails>
-        <Stack spacing={1.5}>
-          <Button color="danger" component="a" href='https://hull.gov.uk/customer-services/customer-service-centres'>
-            View our locations
-          </Button>
-        </Stack>
-      </AccordionDetails>
-    </Accordion>
-        
-    <Accordion>
-      <AccordionSummary>
-        <Avatar color="danger">
-          <MailOutlineIcon />
-        </Avatar>
-        <ListItemContent>
-          <Typography level="title-md">Write to us</Typography>
-          <Typography level="body-sm">
-            See our postal address
-          </Typography>
-        </ListItemContent>
-      </AccordionSummary>
-      <AccordionDetails>
-        <Stack spacing={1.5}>
-         <p>Our postal address</p>
-        </Stack>
-      </AccordionDetails>
-    </Accordion>
-  </AccordionGroup>
-  </>
-  );
+            </Typography>
+          </ListItemContent>
+        </ListItemButton>
+      </ListItem>
+      <Divider sx={{my: 2}} />
+      <ListItem>
+        <ListItemButton component="a" href="https://www.hull.gov.uk/contact-service-1">
+          <ListItemDecorator>
+            <Avatar color="danger">
+              <AlternateEmailIcon />
+            </Avatar>
+          </ListItemDecorator>
+          <ListItemContent>
+            <Typography level="title-md">Contact a service</Typography>
+            <Typography level="body-sm" noWrap>
+              View our service categories
+            </Typography>
+          </ListItemContent>
+        </ListItemButton>
+      </ListItem>
+      <Divider sx={{my: 2}} />
+      <ListItem>
+        <ListItemButton component="a" href="https://yoursay.hull.gov.uk/">
+          <ListItemDecorator>
+            <Avatar color="danger">
+              <PollIcon />
+            </Avatar>
+          </ListItemDecorator>
+          <ListItemContent>
+            <Typography level="title-md">Consultations and engagement</Typography>
+            <Typography level="body-sm" noWrap>
+             Provide feedback on proposals and contribute to the future of our city
+            </Typography>
+          </ListItemContent>
+        </ListItemButton>
+      </ListItem>
+      <Divider sx={{my: 2}} />
+      <ListItem>
+        <ListItemButton component="a" href="https://www.hull.gov.uk/consultation-complaints-feedback">
+          <ListItemDecorator>
+            <Avatar color="danger">
+              <QuestionAnswerIcon />
+            </Avatar>
+          </ListItemDecorator>
+          <ListItemContent>
+            <Typography level="title-md">Complaints and feedback</Typography>
+            <Typography level="body-sm" noWrap>
+             Submit your feedback
+            </Typography>
+          </ListItemContent>
+        </ListItemButton>
+      </ListItem>
+      <Divider sx={{my: 2}} />
+      <ListItem>
+        <ListItemButton component="a" href="tel:01482300300">
+          <ListItemDecorator>
+            <Avatar color="danger">
+              <LocalPhoneIcon />
+            </Avatar>
+          </ListItemDecorator>
+          <ListItemContent>
+            <Typography level="title-md">Call us</Typography>
+            <Typography level="body-sm" noWrap>
+            Call us on 01482 300300, expect longer wait times 
+            </Typography>
+          </ListItemContent>
+        </ListItemButton>
+      </ListItem>
+      <Divider sx={{my: 2}} />
+      <ListItem>
+        <ListItemButton component="a" href="https://hull.gov.uk/customer-services/customer-service-centres">
+          <ListItemDecorator>
+            <Avatar color="danger">
+              <PlaceIcon />
+            </Avatar>
+          </ListItemDecorator>
+          <ListItemContent>
+            <Typography level="title-md">Visit us</Typography>
+            <Typography level="body-sm" noWrap>
+              View our locations
+            </Typography>
+          </ListItemContent>
+        </ListItemButton>
+      </ListItem>
+      <Divider sx={{my: 2}} />
+      <Accordion>
+        <AccordionSummary>
+          <Avatar color="danger">
+            <MailOutlineIcon />
+          </Avatar>
+          <ListItemContent>
+            <Typography level="title-md">Write to us</Typography>
+            <Typography level="body-sm" sx={{fontWeight: 400}}>
+              View our postal address
+            </Typography>
+          </ListItemContent>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Stack spacing={2}>
+          <Typography level="body-md">Our postal address</Typography>
+          <Typography level="body-sm">Hull City Council <br /> The Guildhall  <br /> Alfred Gelder Street  <br /> Hull  <br /> HU1 2AA </Typography>
+          </Stack>
+        </AccordionDetails>
+      </Accordion>
+    </List>
+    </>
+    );
 }
