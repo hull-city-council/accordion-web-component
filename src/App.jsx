@@ -127,21 +127,25 @@ return (
         </ListItemButton>
       </ListItem>
       <Divider sx={{my: 2}} />
-      <ListItem>
-        <ListItemButton component="a" href="tel:01482300300">
-          <ListItemDecorator>
-            <Avatar color="danger">
-              <LocalPhoneIcon />
-            </Avatar>
-          </ListItemDecorator>
+      <Accordion>
+        <AccordionSummary>
+          <Avatar color="danger">
+            <LocalPhoneIcon />
+          </Avatar>
           <ListItemContent>
             <Typography level="title-md">Call us</Typography>
-            <Typography level="body-sm" noWrap>
-            Call us on 01482 300300, expect longer wait times 
+            <Typography level="body-sm" sx={{fontWeight: 400}}>
+              Expect longer wait times
             </Typography>
           </ListItemContent>
-        </ListItemButton>
-      </ListItem>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Stack spacing={2} sx={{my: 2}}>
+            <Typography level="body-sm">Our call centre is available Monday, Tuesday, Thursday and Friday 9am to 4.30pm and Wednesday 10.30am to 4.30pm. Closed on bank holidays.</Typography>
+            <a className="button" href="tel:01482300300">Call 01482 300300</a>
+          </Stack>
+        </AccordionDetails>
+      </Accordion>
       <Divider sx={{my: 2}} />
       <ListItem>
         <ListItemButton component="a" href="https://hull.gov.uk/customer-services/customer-service-centres">
@@ -172,7 +176,7 @@ return (
           </ListItemContent>
         </AccordionSummary>
         <AccordionDetails>
-          <Stack spacing={2}>
+          <Stack spacing={2} sx={{my: 2}}>
           <Typography level="body-md">Our postal address</Typography>
           <Typography level="body-sm">Hull City Council <br /> The Guildhall  <br /> Alfred Gelder Street  <br /> Hull  <br /> HU1 2AA </Typography>
           </Stack>
