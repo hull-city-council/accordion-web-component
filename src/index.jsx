@@ -1,6 +1,6 @@
 import r2wc from "@r2wc/react-to-web-component";
-import AccordionWebComponent from "./App";
+import ContactUsWebComponent from "./App";
 
-const AccordionComponent = r2wc(AccordionWebComponent);
+const contactUsWebComponent = r2wc(ContactUsWebComponent);
 
-customElements.define("accordion-component", AccordionComponent);
+customElements.define("contact-us-component", contactUsWebComponent);

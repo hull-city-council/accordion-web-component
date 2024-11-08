@@ -29,7 +29,7 @@ import dayjs from 'dayjs';
 import { useBankHolidays } from "react-uk-bank-holidays";
 
 
-export default function AccordionWebComponent() {
+export default function ContactUsWebComponent() {
   const isLiveChatAvailable = () => {
     const now = dayjs();
     const dayOfWeek = now.day();
@@ -103,7 +103,7 @@ export default function AccordionWebComponent() {
             <ListItemContent>
               <Typography level="title-md" aria-hidden="true">Consultations and engagement</Typography>
               <Typography level="body-sm" aria-hidden="true">
-                Provide feedback on proposals and contribute to the future of our city
+                Have your say on proposals and contribute to the future of our city
               </Typography>
             </ListItemContent>
           </ListItemButton>
